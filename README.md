@@ -1,4 +1,5 @@
-# Wiztorage (Building process)
+# Wiztorage BETA
+0.0.1
 
 ###Summary 
 Wiztorage allows you either to upload or download files just with a method call, it's very easy and leverages the Dynamicloud's services.  This service is free for use and its limit is related to the capacity in your Dynamicloud account.
