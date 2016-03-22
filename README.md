@@ -58,14 +58,14 @@ a. **Fields:**
   
 | Field identifier | Field label | Field comments | Field type | Is a required field in form? |
 | --- | --- | --- | --- | --- |
-| `name` | File Name | File name, for exemple: my_file.log | Textarea | **Yes** |
-| `size` | File size | File size | Number Field | **Yes** |
-| `checked` | Checked File | Indicates if this chunk is verified | Number Field | **Yes** |
+| `name` | File Name | File name, for exemple: my_file.log | Text field | **Yes** |
+| `size` | File size | File size | Numeric Field | **Yes** |
+| `checked` | Checked File | Indicates if this chunk is verified | Numeric Field | **Yes** |
 | `type` | File type | Contents the file type | Text field | **Yes** |
-| `checkSum` | Checksum  | Checksum for this chunk | Textarea | **Yes** |
-| `chunk` | File Chunk | This is the unit of a file | Textarea | **Yes** |
-| `sequence` | File sequence | Indicates the order for this chunk | Textarea | **Yes** |
-| `description` | File Description | This is an optional description | Textarea | **No** |  
+| `checkSum` | Checksum  | Checksum for this chunk | Text field | **Yes** |
+| `chunk` | File Chunk | This is the unit of a file | Textarea field | **Yes** |
+| `sequence` | File sequence | Indicates the order for this chunk | Numeric field | **Yes** |
+| `description` | File Description | This is an optional description | Textarea field | **No** |  
   
 b. **Add model**
   
