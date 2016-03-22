@@ -100,3 +100,20 @@ aci=Enter_API_Client_Id
 At this moment you have the necessary to start to upload files into the cloud.
 
 #How to use
+
+Wiztorage provides two methods to upload and download files.
+
+**Upload a file**
+```java
+StorageProcessor processor = StorageProcessor.StorageProcessorBuilder.getInstance("wiztorage.properties");
+try {
+    processor.uploadFile(new File("/storage/my_file.txt"), "Esta es una prueba" /*This is the optional description*/, new UploadCallback() {
+        @Override
+        public void finishWork(UploadInfo info) {
+            log.info("info.getCheckSum() = " + info.getCheckSum());
+        }
+    });
+} catch (StorageProcessorException e) {
+    log.error(e);
+}
+```
