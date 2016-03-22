@@ -74,7 +74,7 @@ A model is the cointainer of these fields, to add a model follow the next steps:
 1. Click on **Add model** link at your **Real time Dashboard**
 2. Fill the mandatory field name and set a description (Optional)
 3. Press button Create
-4. In the list of Models the Model box has a header with the model Id, copy that Id and put it in your `log4j.properties` file.
+4. In the list of Models the Model box has a header with the model Id, copy that Id and put it in your `wiztorage.properties` file.
 
 ```properties
 # This is the model identifier
