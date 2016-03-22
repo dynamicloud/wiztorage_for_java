@@ -44,3 +44,59 @@ aci=aci#...
 # For more information about models in Dynamicloud visit https://www.dynamicloud.org/documents/mfdoc
 modelIdentifier=123
 ```
+
+###Dynamicloud account
+
+Wiztorage needs API credentials from a Dynamicloud account, these credentials allow Wiztorage to access your account's structure (Model).  The mandatory model in your account should be composed for a model with at least seven fields.  For further information about models and fields in Dynamicloud visit its documentation at [Models & Fields](https://www.dynamicloud.org/documents/mfdoc "Dynamicloud documentation")
+
+**We are going to explain step by step how to setup your account in Dynamicloud, trust us it's very easy:**
+
+1. Sign up in Dynamicloud (You can use either Google, Linkedin or Github account to speed up the registration)
+2. Click on **Add Field** link at your **Real time Dashboard**.  Here you need to add seven fields:
+  
+a. **Fields:**
+  
+| Field identifier | Field label | Field comments | Field type | Is a required field in form? |
+| --- | --- | --- | --- | --- |
+| `name` | File Name | File name, for exemple: my_file.log | Textarea | **Yes** |
+| `size` | File size | File size | Number Field | **Yes** |
+| `checked` | Checked File | Indicates if this chunk is verified | Number Field | **Yes** |
+| `type` | File type | Contents the file type | Text field | **Yes** |
+| `checkSum` | Checksum  | Checksum for this chunk | Textarea | **Yes** |
+| `chunk` | File Chunk | This is the unit of a file | Textarea | **Yes** |
+| `sequence` | File sequence | Indicates the order for this chunk | Textarea | **YES** |
+| `description` | File Description | This is a optional description | Textarea | **No** |  
+  
+b. **Add model**
+  
+A model is the cointainer of these fields, to add a model follow the next steps:
+
+1. Click on **Add model** link at your **Real time Dashboard**
+2. Fill the mandatory field name and set a description (Optional)
+3. Press button Create
+4. In the list of Models the Model box has a header with the model Id, copy that Id and put it in your `log4j.properties` file.
+
+```properties
+# This is the model identifier
+# The model contains the structure to store logs into the cloud
+# For more information about models in Dynamicloud visit https://www.dynamicloud.org/documents/mfdoc
+modelIdentifier=Enter_Model_Id
+```
+
+####The last step is to copy the API credentials (CSK and ACI keys) to put them in your `log4j.properties` file.
+
+1. Click on **Your name link at right top of your account**
+2. Copy the CSK and ACI keys and put them into your `log4j.properties` file.
+
+```properties
+# Credentials for REST APIs
+# Go to https://www.dynamicloud.org/manage and get the API keys available in your profile
+# If you don't have an account in Dynamicloud, visit https://www.dynamicloud.org/signupform
+# You can easily use a social network to sign up
+csk=Enter_Client_Secret_Key
+aci=Enter_API_Client_Id
+```
+
+At this moment you have the necessary to start to upload files into the cloud.
+
+#How to use
