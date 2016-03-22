@@ -107,7 +107,7 @@ Wiztorage provides two methods to upload and download files.
 ```java
 StorageProcessor processor = StorageProcessor.StorageProcessorBuilder.getInstance("wiztorage.properties");
 try {
-    processor.uploadFile(new File("/storage/my_file.txt"), "Esta es una prueba" /*This is the optional description*/, new UploadCallback() {
+    processor.uploadFile(new File("/storage/my_file.txt"), "This is my file!" /*This is the optional description*/, new UploadCallback() {
         @Override
         public void finishWork(UploadInfo info) {
             log.info("info.getCheckSum() = " + info.getCheckSum());
@@ -117,3 +117,16 @@ try {
     log.error(e);
 }
 ```
+
+**Download a file**
+```java
+StorageProcessor processor = StorageProcessor.StorageProcessorBuilder.getInstance("wiztorage.properties");
+processor.downloadFile("my_file.txt", new File("/storage/from_dymamicloud_" + System.currentTimeMillis() + ".txt"), new DownloadCallback() {
+    @Override
+    public void finishWork(DownloadInfo info) {
+        log.info("info = " + info);
+    }
+});
+```
+
+For further information and support about wiztorage, contact us at [Contact](https://www.dynamicloud.org/contact "Dynamicloud contact")
