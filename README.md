@@ -83,10 +83,10 @@ A model is the cointainer of these fields, to add a model follow the next steps:
 modelIdentifier=Enter_Model_Id
 ```
 
-####The last step is to copy the API credentials (CSK and ACI keys) to put them in your `log4j.properties` file.
+####The last step is to copy the API credentials (CSK and ACI keys) to put them in your `wiztorage.properties` file.
 
 1. Click on **Your name link at right top of your account**
-2. Copy the CSK and ACI keys and put them into your `log4j.properties` file.
+2. Copy the CSK and ACI keys and put them into your `wiztorage.properties` file.
 
 ```properties
 # Credentials for REST APIs
