@@ -85,7 +85,7 @@ modelIdentifier=Enter_Model_Id
 
 ####The last step is to copy the API credentials (CSK and ACI keys) to put them in your `wiztorage.properties` file.
 
-1. Click on **Your name link at right top of your account**
+1. Click on **Your name link at left top of your account**
 2. Copy the CSK and ACI keys and put them into your `wiztorage.properties` file.
 
 ```properties
