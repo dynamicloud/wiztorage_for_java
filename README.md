@@ -129,7 +129,7 @@ try {
       }
   });
 } catch (StorageProcessorException e) {
-    fail(e.getMessage());
+    log.error(e);
 }
 ```
 
