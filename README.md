@@ -121,12 +121,16 @@ try {
 **Download a file**
 ```java
 StorageProcessor processor = StorageProcessor.StorageProcessorBuilder.getInstance("wiztorage.properties");
-processor.downloadFile("my_file.txt", new File("/storage/from_dymamicloud_" + System.currentTimeMillis() + ".txt"), new DownloadCallback() {
-    @Override
-    public void finishWork(DownloadInfo info) {
-        log.info("info = " + info);
-    }
-});
+try {  
+  processor.downloadFile("my_file.txt", new File("/storage/from_dymamicloud_" + System.currentTimeMillis() + ".txt"), new DownloadCallback() {
+      @Override
+      public void finishWork(DownloadInfo info) {
+          log.info("info = " + info);
+      }
+  });
+} catch (StorageProcessorException e) {
+    fail(e.getMessage());
+}
 ```
 
 For further information and support about wiztorage, contact us at [Contact](https://www.dynamicloud.org/contact "Dynamicloud contact")
