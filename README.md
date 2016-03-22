@@ -64,8 +64,8 @@ a. **Fields:**
 | `type` | File type | Contents the file type | Text field | **Yes** |
 | `checkSum` | Checksum  | Checksum for this chunk | Textarea | **Yes** |
 | `chunk` | File Chunk | This is the unit of a file | Textarea | **Yes** |
-| `sequence` | File sequence | Indicates the order for this chunk | Textarea | **YES** |
-| `description` | File Description | This is a optional description | Textarea | **No** |  
+| `sequence` | File sequence | Indicates the order for this chunk | Textarea | **Yes** |
+| `description` | File Description | This is an optional description | Textarea | **No** |  
   
 b. **Add model**
   
