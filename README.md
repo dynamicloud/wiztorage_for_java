@@ -29,7 +29,7 @@ Wiztorage jar file is available on release page.
 
 #Settings
 
-Wiztorage needs a basic settings to be configured, the settings of wiztorage are within a properties file.
+Wiztorage needs a basic settings to be configured, the settings of wiztorage are within a properties file (wiztorage.properties).  This file must be in the root of your classpath.
 
 **These are the settings of wiztorage:**
 
