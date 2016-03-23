@@ -39,6 +39,25 @@ public class TestStorageProcessorImpl extends TestCase {
         super.setUp();
     }
 
+    public void testStorageProcessorExistsDeleteFile() {
+        StorageProcessor processor = StorageProcessor.StorageProcessorBuilder.getInstance("test/wiztorage.properties");
+        try {
+            processor.uploadFile(new File("test/test_file_read_big.txt"), "", new UploadCallback() {
+                @Override
+                public void finishWork(UploadInfo info) {
+                    System.out.println("info.getCheckSum() = " + info.getCheckSum());
+                }
+            });
+
+            assertTrue(processor.existsFile("test_file_read_big.txt"));
+
+            processor.deleteFile("test_file_read_big.txt");
+            assertFalse(processor.existsFile("test_file_read_big.txt"));
+        } catch (StorageProcessorException e) {
+            fail(e.getMessage());
+        }
+    }
+
     public void testStorageProcessorUploadBigFile() {
         StorageProcessor processor = StorageProcessor.StorageProcessorBuilder.getInstance("test/wiztorage.properties");
         try {

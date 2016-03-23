@@ -111,7 +111,7 @@ public class StorageProcessorImpl implements StorageProcessor {
         try {
             StorageValidator validator = StorageValidator.StorageValidatorBuilder.getInstance(this.credentials);
             if (validator.existsFileName(file.getName())) {
-                throw new StorageProcessorException("Filename already exists in Dynamicloud servers.");
+                throw new StorageProcessorException("Filename already exists in Dynamicloud servers.  Probably this filename has an invalid state, try to execute cleanUp.");
             }
         } catch (RuntimeWiztorageException e) {
             throw new StorageProcessorException(e.getMessage());
@@ -197,6 +197,64 @@ public class StorageProcessorImpl implements StorageProcessor {
     }
 
     /**
+     * This method deletes a file
+     *
+     * @param fileName to be deleted
+     * @throws org.dynamicloud.wiztorage.exception.StorageProcessorException if an error occurs
+     */
+    @Override
+    public void deleteFile(String fileName) throws StorageProcessorException {
+        deleteFiles(new String[]{fileName});
+    }
+
+    /**
+     * This method deletes an array of file
+     *
+     * @param fileNames to be deleted
+     * @throws StorageProcessorException if an error occurs
+     */
+    @Override
+    public void deleteFiles(String[] fileNames) throws StorageProcessorException {
+        DynamicProvider<UploadBean> provider = new DynamicProviderImpl<UploadBean>(StorageProcessorImpl.this.credentials);
+
+        Query<UploadBean> query = provider.createQuery(new RecordModel(this.credentials.getModelIdentifier()));
+        query.add(Conditions.in("name", fileNames));
+
+        try {
+            provider.delete(query);
+        } catch (Exception e) {
+            throw new StorageProcessorException(e.getMessage());
+        }
+    }
+
+    /**
+     * This method validates if a file already exists
+     * Returns true if a chunk has the name fileName
+     *
+     * @param fileName to be verified
+     * @param checked  indicates if this verification is for file checked or not.
+     * @throws StorageProcessorException if an error occurs
+     */
+    @Override
+    public boolean existsFile(String fileName, boolean checked) throws StorageProcessorException {
+        StorageValidator validator = StorageValidator.StorageValidatorBuilder.getInstance(this.credentials);
+        return validator.existsFileName(fileName);
+    }
+
+    /**
+     * This method validates if a file already exists
+     * Returns true if a chunk has the name fileName, regardless if this chunk is not already checked
+     * If you want to make sure that a file exists and is checked, you need to call existsFile(fileName, true)
+     *
+     * @param fileName to be verified
+     * @throws StorageProcessorException if an error occurs
+     */
+    @Override
+    public boolean existsFile(String fileName) throws StorageProcessorException {
+        return existsFile(fileName, false);
+    }
+
+    /**
      * This method downloads a file from Dynamicloud using a fileName as target
      *
      * @param fileName    file name target to download file
@@ -248,8 +306,9 @@ public class StorageProcessorImpl implements StorageProcessor {
      * @throws StorageProcessorException if an error occurs.
      */
     private void executeWritingProcess(String fileName, File destination, DownloadCallback callback) throws StorageProcessorException {
+        FileWriter fileWriter = null;
         try {
-            FileWriter fileWriter = FileWriter.FileWriterBuilder.getInstance(destination);
+            fileWriter = FileWriter.FileWriterBuilder.getInstance(destination);
 
             DynamicProvider<UploadBean> provider = new DynamicProviderImpl<UploadBean>(StorageProcessorImpl.this.credentials);
 
@@ -260,6 +319,7 @@ public class StorageProcessorImpl implements StorageProcessor {
             query.setProjection("id as rid").add(Conditions.equals("name", fileName)).orderBy("sequence").asc();
 
             StringBuilder checkSums = new StringBuilder();
+            StringBuilder description = new StringBuilder();
 
             try {
                 RecordResults<UploadBean> list = query.list();
@@ -268,8 +328,10 @@ public class StorageProcessorImpl implements StorageProcessor {
                     return;
                 }
 
-                loopRecords(fileWriter, provider, query, checkSums, list);
-            } catch (DynamicloudProviderException e) {
+                loopRecords(fileWriter, provider, query, checkSums, description, list);
+            } catch (Exception e) {
+                fileWriter.rollback();
+
                 throw new StorageProcessorException(e.getMessage());
             } finally {
                 fileWriter.finish();
@@ -278,10 +340,14 @@ public class StorageProcessorImpl implements StorageProcessor {
             DownloadInfo info = new DownloadInfo();
             info.setCheckSum(WiztorageUtils.generateCheckSum(checkSums.toString()));
             info.setFileName(fileName);
+            info.setDescription(description.toString());
             info.setSize(new File(destination.getAbsolutePath()).length());
 
             callback.finishWork(info);
         } catch (FileWriterException e) {
+            if (fileWriter != null) {
+                fileWriter.rollback();
+            }
             throw new StorageProcessorException(e.getMessage());
         }
     }
@@ -297,7 +363,7 @@ public class StorageProcessorImpl implements StorageProcessor {
      * @throws FileWriterException if an error occurs
      */
     private void loopRecords(FileWriter fileWriter, DynamicProvider<UploadBean> provider, Query<UploadBean> query,
-                             StringBuilder checkSums, RecordResults<UploadBean> list) throws FileWriterException {
+                             StringBuilder checkSums, StringBuilder description, RecordResults<UploadBean> list) throws FileWriterException {
         for (UploadBean beanWithId : list.getRecords()) {
             UploadBean uploadBean;
             try {
@@ -305,6 +371,10 @@ public class StorageProcessorImpl implements StorageProcessor {
                         new RecordModel(this.credentials.getModelIdentifier()), UploadBean.class);
             } catch (Exception e) {
                 throw new FileWriterException(e.getMessage());
+            }
+
+            if (description.length() == 0) {
+                description.append(uploadBean.getDescription());
             }
 
             fileWriter.writeFile(uploadBean.getChunk());
@@ -322,6 +392,6 @@ public class StorageProcessorImpl implements StorageProcessor {
             return;
         }
 
-        loopRecords(fileWriter, provider, query, checkSums, list);
+        loopRecords(fileWriter, provider, query, checkSums, description, list);
     }
 }

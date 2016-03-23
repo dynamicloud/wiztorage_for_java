@@ -1,7 +1,6 @@
 package org.dynamicloud.wiztorage.validator;
 
 import org.dynamicloud.wiztorage.DynamicloudCredentials;
-import org.dynamicloud.wiztorage.processor.StorageProcessorImpl;
 
 /**
  * Copyright (c) 2016 Dynamicloud
@@ -39,11 +38,21 @@ public interface StorageValidator {
      */
     public boolean existsFileName(String fileName);
 
+    /**
+     * This method validates if a filename already exists
+     *
+     * @param fileName to validate
+     * @param checked  verify is checked or not
+     * @return true if already exists and is checked.
+     */
+    public boolean existsFileName(String fileName, boolean checked);
+
     public class StorageValidatorBuilder {
         private static StorageValidator instance;
 
         /**
          * Returns a singleton object of FileReader
+         *
          * @param credentials DynamicloudCredentials
          */
         public static StorageValidator getInstance(DynamicloudCredentials credentials) {

@@ -31,6 +31,7 @@ package org.dynamicloud.wiztorage.processor;
 public class DownloadInfo {
     private String checkSum;
     private String fileName;
+    private String description;
     private Long size;
 
     public String getCheckSum() {
@@ -55,6 +56,14 @@ public class DownloadInfo {
 
     public void setSize(Long size) {
         this.size = size;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

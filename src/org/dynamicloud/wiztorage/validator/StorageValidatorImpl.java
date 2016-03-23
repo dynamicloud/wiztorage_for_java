@@ -43,6 +43,7 @@ public class StorageValidatorImpl implements StorageValidator {
 
     /**
      * Creates an object with the DynamicloudCredentials
+     *
      * @param credentials DynamicloudCredentials
      */
     public StorageValidatorImpl(DynamicloudCredentials credentials) {
@@ -56,13 +57,29 @@ public class StorageValidatorImpl implements StorageValidator {
      * @return true if already exists.
      */
     public boolean existsFileName(String fileName) {
+        return existsFileName(fileName, false);
+    }
+
+    /**
+     * This method validates if a filename already exists
+     *
+     * @param fileName to validate
+     * @param checked  verify is checked or not
+     * @return true if already exists and is checked.
+     */
+    @Override
+    public boolean existsFileName(String fileName, boolean checked) {
         DynamicProvider<UploadBean> provider = new DynamicProviderImpl<UploadBean>(this.credentials);
 
         RecordModel recordModel = new RecordModel(this.credentials.getModelIdentifier());
         recordModel.setBoundClass(UploadBean.class);
 
         Query<UploadBean> query = provider.createQuery(recordModel);
-        query.add(Conditions.and(Conditions.equals("name", fileName), Conditions.equals("checked", 1)));
+        if (checked) {
+            query.add(Conditions.and(Conditions.equals("name", fileName), Conditions.equals("checked", 1)));
+        } else {
+            query.add(Conditions.equals("name", fileName));
+        }
 
         query.setProjection("count(*) as count");
 

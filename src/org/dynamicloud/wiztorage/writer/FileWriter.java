@@ -48,6 +48,11 @@ public interface FileWriter {
      */
     public void finish();
 
+    /**
+     * This method rollbacks the writing process.
+     */
+    public void rollback();
+
     public class FileWriterBuilder {
         /**
          * Returns a new instance of FileWriter

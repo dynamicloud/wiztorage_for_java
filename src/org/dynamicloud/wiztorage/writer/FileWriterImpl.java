@@ -35,10 +35,12 @@ import java.io.*;
  */
 public class FileWriterImpl implements FileWriter {
     private FileOutputStream outputStream;
+    private File file;
 
     public FileWriterImpl(File file) throws FileWriterException {
         try {
             this.outputStream = new FileOutputStream(file);
+            this.file = file;
         } catch (FileNotFoundException e) {
             throw new FileWriterException(e.getMessage());
         }
@@ -63,6 +65,15 @@ public class FileWriterImpl implements FileWriter {
         } catch (IOException e) {
             throw new FileWriterException(e.getMessage());
         }
+    }
+
+    /**
+     * This method rollbacks the writing process.
+     */
+    @Override
+    public void rollback() {
+        this.finish();
+        this.file.delete();
     }
 
     /**

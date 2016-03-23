@@ -52,6 +52,42 @@ public interface StorageProcessor {
     public void uploadFile(File file, String description, UploadCallback callback) throws StorageProcessorException;
 
     /**
+     * This method deletes a file
+     *
+     * @param fileName to be deleted
+     * @throws org.dynamicloud.wiztorage.exception.StorageProcessorException if an error occurs
+     */
+    public void deleteFile(String fileName) throws StorageProcessorException;
+
+    /**
+     * This method deletes an array of file
+     *
+     * @param fileNames to be deleted
+     * @throws StorageProcessorException if an error occurs
+     */
+    public void deleteFiles(String[] fileNames) throws StorageProcessorException;
+
+    /**
+     * This method validates if a file already exists
+     * Returns true if a chunk has the name fileName
+     *
+     * @param fileName to be verified
+     * @param checked  indicates if this verification is for file checked or not.
+     * @throws StorageProcessorException if an error occurs
+     */
+    public boolean existsFile(String fileName, boolean checked) throws StorageProcessorException;
+
+    /**
+     * This method validates if a file already exists
+     * Returns true if a chunk has the name fileName, regardless if this chunk is not already checked
+     * If you want to make sure that a file exists and is checked, you need to call existsFile(fileName, true)
+     *
+     * @param fileName to be verified
+     * @throws StorageProcessorException if an error occurs
+     */
+    public boolean existsFile(String fileName) throws StorageProcessorException;
+
+    /**
      * This method downloads a file from Dynamicloud using a fileName
      *
      * @param fileName    file name target to download file
