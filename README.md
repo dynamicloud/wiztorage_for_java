@@ -144,6 +144,16 @@ try {
 }
 ```
 
+**Delete an array of files**
+```java
+StorageProcessor processor = StorageProcessor.StorageProcessorBuilder.getInstance("wiztorage.properties");
+try {  
+  processor.deleteFiles(new String[] {"my_file.txt", "my_file_two.txt"});
+} catch (StorageProcessorException e) {
+    log.error(e);
+}
+```
+
 **Verify if a file already exists**
 ```java
 StorageProcessor processor = StorageProcessor.StorageProcessorBuilder.getInstance("wiztorage.properties");
