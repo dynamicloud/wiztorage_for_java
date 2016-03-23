@@ -102,7 +102,7 @@ At this moment you have the necessary to start to upload, download, verify and d
 
 #How to use
 
-Wiztorage provides two methods to upload and download files.
+Wiztorage provides a set of methods to upload, download, verify and delete files.
 
 **Upload a file**
 ```java
