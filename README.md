@@ -11,7 +11,7 @@ Wiztorage allows you either to upload or download files just with a method call,
 3. Every chunk is a based64 encode that can be checked separately from Dynamicloud's site.
 4. Wiztorage sends 512 Kb per chunk, so, if you need to upload a file of 10mb Wiztorage will send ~ 20 chunks.
 5. Wiztorage allows you to send any kind of files.
-6. You can upload/download at any time.
+6. You can upload, download, verify and delete files at any time.
 
 **This documentation has the following content:**
 
