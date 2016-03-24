@@ -26,7 +26,7 @@ Wiztorage allows you either to upload or download files just with a method call,
 
 #Installation
 Install wiztorage's jar like any other jar file in your app's lib folder.
-Wiztorage jar file is available on release page.
+Wiztorage jar file is available on [Release page](https://github.com/dynamicloud/wiztorage_for_java/releases "Release").
 
 #Settings
 
