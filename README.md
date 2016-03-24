@@ -1,4 +1,4 @@
-# Wiztorage BETA
+# Wiztorage
 0.0.1
 
 ###Summary 
