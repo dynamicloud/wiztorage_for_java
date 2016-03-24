@@ -22,7 +22,7 @@ Wiztorage allows you either to upload or download files just with a method call,
 3. [How to use](#how-to-use)
   
 #Dependencies
-**Wiztorage has two depedendencies:** dynamicloud and Apache Commons Codec 1.10 or later.
+**Wiztorage has two depedendencies:** [Dynamicloud for Java](https://github.com/dynamicloud/dynamicloud_java_api "Dynamicloud for Java") and Apache Commons Codec 1.10 or later.
 
 #Installation
 Install wiztorage's jar like any other jar file in your app's lib folder.
