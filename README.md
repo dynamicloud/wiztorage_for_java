@@ -7,7 +7,7 @@ Wiztorage allows you either to upload or download files just with a method call,
 ###Features
 
 1. Wiztorage is powered by Dynamicloud.
-2. Wiztorage stores a file as a chunks into a model in Dynamicloud, these chunks all together represent a file.
+2. Wiztorage stores a file as a chunks into a model in Dynamicloud, these chunks altogether represent a file.
 3. Every chunk is a based64 encode that can be checked separately from Dynamicloud's site.
 4. Wiztorage sends 512 Kb per chunk, so, if you need to upload a file of 10mb Wiztorage will send ~ 20 chunks.
 5. Wiztorage allows you to send any kind of files.
