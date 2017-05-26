@@ -1,10 +1,10 @@
 # Wiztorage
 0.0.1
 
-###Summary 
+### Summary 
 Wiztorage allows you either to upload or download files just with a method call, it's very easy and leverages the Dynamicloud's services.  This service is free for use and its limit is related to the capacity in your Dynamicloud account.
 
-###Features
+### Features
 
 1. Wiztorage is powered by Dynamicloud.
 2. Wiztorage stores a file as a chunks into a model in Dynamicloud, these chunks altogether represent a file.
@@ -21,14 +21,14 @@ Wiztorage allows you either to upload or download files just with a method call,
   2. [Dynamicloud account](#dynamicloud-account)
 3. [How to use](#how-to-use)
   
-#Dependencies
+# Dependencies
 **Wiztorage has two depedendencies:** [Dynamicloud for Java](https://github.com/dynamicloud/dynamicloud_java_api "Dynamicloud for Java") and Apache Commons Codec 1.10 or later.
 
-#Installation
+# Installation
 Install wiztorage's jar like any other jar file in your app's lib folder.
 Wiztorage jar file is available on [Release page](https://github.com/dynamicloud/wiztorage_for_java/releases "Release").
 
-#Settings
+# Settings
 
 Wiztorage needs a basic settings to be configured, the settings of wiztorage are within a properties file (wiztorage.properties).  This file must be in the root of your classpath.
 
@@ -46,7 +46,7 @@ aci=aci#...
 modelIdentifier=123
 ```
 
-###Dynamicloud account
+### Dynamicloud account
 
 Wiztorage needs API credentials from a Dynamicloud account, these credentials allow Wiztorage to access your account's structure (Model).  The mandatory model in your account should be composed for a model with at least seven fields.  For further information about models and fields in Dynamicloud visit its documentation at [Models & Fields](https://www.dynamicloud.org/documents/mfdoc "Dynamicloud documentation")
 
@@ -84,7 +84,7 @@ A model is the cointainer of these fields, to add a model follow the next steps:
 modelIdentifier=Enter_Model_Id
 ```
 
-####The last step is to copy the API credentials (CSK and ACI keys) to put them in your `wiztorage.properties` file.
+#### The last step is to copy the API credentials (CSK and ACI keys) to put them in your `wiztorage.properties` file.
 
 1. Click on **Your name link at left top of your account**
 2. Copy the CSK and ACI keys and put them into your `wiztorage.properties` file.
@@ -100,7 +100,7 @@ aci=Enter_API_Client_Id
 
 At this moment you have the necessary to start to upload, download, verify and delete files from and into the cloud.
 
-#How to use
+# How to use
 
 Wiztorage provides a set of methods to upload, download, verify and delete files.
 
